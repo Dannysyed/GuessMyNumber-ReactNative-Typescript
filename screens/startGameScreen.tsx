@@ -1,21 +1,51 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PrimaryButtons from '../components/PrimaryButtons'
 import User from './models'
 
 const StartGameScreen = () => {
-    let [divesh, setdivesh] = React.useState<User>({ name: 'sdf', age: 1, id: 1 })
-    // setdivesh({})
+    let [inputNumber, setInputNumber] = useState<string>('')
+    let [randomNum, setrandom] = useState<number>(0)
+    useEffect(() => {
+        setrandom(Math.floor(Math.random() * 10))
+    }, [])
+
+
+    let onChangeNumber = (enteredText: string) => {
+        let numberinput = Number(enteredText)
+        setInputNumber(enteredText)
+        // console.log(numberinput)
+
+    }
+    let onResetHandle = () => {
+        alert('onreset')
+    }
+    let onConfirmHandle = () => {
+        alert('onconfirm')
+        console.log(inputNumber)
+        console.log(randomNum)
+        if (Number(inputNumber) === randomNum) {
+            alert(true)
+        }
+        else if (Number(inputNumber) > randomNum) {
+            alert('Lower')
+        }
+        else if (Number(inputNumber) < randomNum) {
+            alert('Higer')
+        }
+        else {
+            alert(false)
+        }
+
+    }
     return (
         <View style={styles.innerContainer}>
-            <TextInput style={styles.inputcolor} maxLength={2} keyboardType={'number-pad'} />
+            <TextInput style={styles.inputcolor} maxLength={2} keyboardType={'number-pad'} onChangeText={onChangeNumber} value={inputNumber} />
             <View style={styles.button}>
                 <View style={styles.buttoContain}>
-                    <PrimaryButtons>Reset</PrimaryButtons>
+                    <PrimaryButtons onPress={onResetHandle}>Reset</PrimaryButtons>
                 </View>
-                <View style={styles.buttoContain}><PrimaryButtons>Confirm</PrimaryButtons></View>
-
-
+                <View style={styles.buttoContain}><PrimaryButtons onPress={onConfirmHandle}>Confirm</PrimaryButtons></View>
             </View>
         </View>
     )

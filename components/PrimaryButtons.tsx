@@ -1,14 +1,11 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { PropsWithChildren } from 'react'
 
-const PrimaryButtons: React.FC<PropsWithChildren> = (prop) => {
-    let Presshandle = () => {
-        // alert('d')
-    }
+const PrimaryButtons: React.FC<PropsWithChildren & { onPress: () => void, }> = (props) => {
     return (
         <View style={styles.Outlet}>
-            <Pressable style={({ pressed }) => pressed ? [styles.pressed, styles.container] : styles.container} onPress={Presshandle} android_ripple={{ color: '#ac12a4' }}>
-                <Text style={styles.text}>{prop.children}</Text>
+            <Pressable style={({ pressed }) => pressed ? [styles.pressed, styles.container] : styles.container} onPress={props.onPress} android_ripple={{ color: '#ac12a4' }}>
+                <Text style={styles.text}>{props.children}</Text>
             </Pressable>
         </View >
     )
