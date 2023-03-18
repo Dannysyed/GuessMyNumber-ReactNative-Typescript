@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { StyleSheet, Text, TextInput, View, Alert } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import PrimaryButtons from '../components/PrimaryButtons'
 import User from './models'
@@ -7,7 +7,7 @@ const StartGameScreen = () => {
     let [inputNumber, setInputNumber] = useState<string>('')
     let [randomNum, setrandom] = useState<number>(0)
     useEffect(() => {
-        setrandom(Math.floor(Math.random() * 10))
+        setrandom(Math.floor(Math.random() * 10) + 1)
     }, [])
 
 
@@ -21,20 +21,27 @@ const StartGameScreen = () => {
         alert('onreset')
     }
     let onConfirmHandle = () => {
-        alert('onconfirm')
-        console.log(inputNumber)
-        console.log(randomNum)
-        if (Number(inputNumber) === randomNum) {
-            alert(true)
-        }
-        else if (Number(inputNumber) > randomNum) {
-            alert('Lower')
-        }
-        else if (Number(inputNumber) < randomNum) {
-            alert('Higer')
+        if (isNaN(Number(inputNumber)) || Number(inputNumber) > 99 || Number(inputNumber) <= 0) {
+            Alert.alert('NOT A VALID INPUT',
+                'PLease reset now',
+                [{ text: 'okay', style: 'destructive', onPress: onResetHandle }])
         }
         else {
-            alert(false)
+
+            if (Number(inputNumber) === randomNum) {
+                Alert.alert('You won',
+                    'PLease reset now',
+                    [{ text: 'okay', style: 'destructive', onPress: onResetHandle }])
+            }
+            else if (Number(inputNumber) > randomNum) {
+                alert('Lower')
+            }
+            else if (Number(inputNumber) < randomNum) {
+                alert('Higer')
+            }
+            else {
+                alert(false)
+            }
         }
 
     }
