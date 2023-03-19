@@ -1,9 +1,9 @@
 import { StyleSheet, Text, TextInput, View, Alert } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, FC } from 'react'
 import PrimaryButtons from '../components/PrimaryButtons'
 import User from './models'
 
-const StartGameScreen = () => {
+const StartGameScreen: FC<{ pickedNumber: (data: any) => void }> = (prop) => {
     let [inputNumber, setInputNumber] = useState<string>('')
     let [randomNum, setrandom] = useState<number>(0)
     useEffect(() => {
@@ -27,6 +27,9 @@ const StartGameScreen = () => {
                 [{ text: 'okay', style: 'destructive', onPress: onResetHandle }])
         }
         else {
+
+            prop.pickedNumber(Number(inputNumber))
+
 
             if (Number(inputNumber) === randomNum) {
                 Alert.alert('You won',
