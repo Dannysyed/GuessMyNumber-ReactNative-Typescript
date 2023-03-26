@@ -31,20 +31,20 @@ const StartGameScreen: FC<{ pickedNumber: (data: any) => void }> = (prop) => {
             prop.pickedNumber(Number(inputNumber))
 
 
-            if (Number(inputNumber) === randomNum) {
-                Alert.alert('You won',
-                    'PLease reset now',
-                    [{ text: 'okay', style: 'destructive', onPress: onResetHandle }])
-            }
-            else if (Number(inputNumber) > randomNum) {
-                alert('Lower')
-            }
-            else if (Number(inputNumber) < randomNum) {
-                alert('Higer')
-            }
-            else {
-                alert(false)
-            }
+            // if (Number(inputNumber) === randomNum) {
+            //     Alert.alert('You won',
+            //         'PLease reset now',
+            //         [{ text: 'okay', style: 'destructive', onPress: onResetHandle }])
+            // }
+            // else if (Number(inputNumber) > randomNum) {
+            //     alert('Lower')
+            // }
+            // else if (Number(inputNumber) < randomNum) {
+            //     alert('Higer')
+            // }
+            // else {
+            //     alert(false)
+            // }
         }
 
     }
